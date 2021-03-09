@@ -20,6 +20,7 @@ export const DEFAULT_CONFIG: JestPlaywrightConfig = {
   browsers: [CHROMIUM],
   exitOnPageError: true,
   collectCoverage: false,
+  coverageOutput: 'file',
 }
 
 export const DEFAULT_TEST_PLAYWRIGHT_TIMEOUT = 15000

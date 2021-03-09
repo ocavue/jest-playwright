@@ -216,6 +216,7 @@ export interface JestPlaywrightConfig {
   serverOptions?: JestProcessManagerOptions | JestProcessManagerOptions[]
   selectors?: SelectorType[]
   collectCoverage?: boolean
+  coverageOutput?: 'file' | 'jest' | 'all'
 }
 
 export interface JestPlaywrightProjectConfig extends JestConfig.ProjectConfig {
