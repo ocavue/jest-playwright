@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "expect-playwright": "^0.3.2",
+    "istanbul-lib-coverage": ">=3.0.0",
     "jest-circus": "^26.6.3",
     "jest-environment-node": "^26.6.2",
     "jest-process-manager": "^0.2.9",
