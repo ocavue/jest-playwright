@@ -25,6 +25,7 @@ export const setupCoverage = async (): Promise<void> => {
 }
 
 export const saveCoverageToFile = async (coverage: unknown): Promise<void> => {
+  console.log('[debug] saveCoverageToFile')
   await fsAsync.writeFile(
     path.join(COV_MERGE_DIR, `${uuid.v4()}.json`),
     JSON.stringify(coverage),
@@ -35,6 +36,7 @@ export const saveCoverageOnPage = async (
   page: Page,
   collectCoverage = false,
 ): Promise<void> => {
+  console.log('[debug] saveCoverageOnPage')
   if (!collectCoverage) {
     console.warn(
       'jest-playwright: saveCoverage was called but collectCoverage is not true in jest-playwright.js',
