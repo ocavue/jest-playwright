@@ -4,6 +4,7 @@
   "testEnvironment": "jest-playwright-preset",
   "runner": "jest-playwright-preset/runner.js",
   "testRunner": "jest-circus/runner",
+  "reporters": ["default",  "jest-playwright-preset/reporter.js"],
   "setupFilesAfterEnv": [
     "expect-playwright",
     "jest-playwright-preset/lib/extends.js"
