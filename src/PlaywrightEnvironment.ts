@@ -264,8 +264,10 @@ export const getPlaywrightEnv = (basicEnv = 'node'): unknown => {
           )
           await (this.global.context as BrowserContext).addInitScript(() =>
             window.addEventListener('beforeunload', () => {
+              console.log('[debug] beforeunload start')
               // @ts-ignore
               reportCodeCoverage(window.__coverage__)
+              console.log('[debug] beforeunload ebd')
             }),
           )
         }
@@ -385,8 +387,9 @@ export const getPlaywrightEnv = (basicEnv = 'node'): unknown => {
             stdin.on('data', onKeyPress)
           })
         },
-        saveCoverage: async (page: Page): Promise<void> =>
-          saveCoverageOnPage(page, collectCoverage),
+        saveCoverage: async (page: Page): Promise<void> => {
+          saveCoverageOnPage(page, collectCoverage)
+        },
       }
     }
 
@@ -402,10 +405,12 @@ export const getPlaywrightEnv = (basicEnv = 'node'): unknown => {
     }
 
     async teardown(): Promise<void> {
+      console.log('[debug] teardown step 1')
       const { browser, context, page } = this.global
       const { collectCoverage } = this._jestPlaywrightConfig
       page?.removeListener('pageerror', handleError)
       if (collectCoverage) {
+        console.log('[debug] teardown step 4')
         await Promise.all(
           (context as BrowserContext).pages().map((p) =>
             p.close({
@@ -413,13 +418,16 @@ export const getPlaywrightEnv = (basicEnv = 'node'): unknown => {
             }),
           ),
         )
+        console.log('[debug] teardown step 5')
         // wait until coverage data was sent successfully to the exposed function
-        await new Promise((resolve) => setTimeout(resolve, 10))
+        await new Promise((resolve) => setTimeout(resolve, 20))
+        console.log('[debug] teardown step 6')
       }
 
       await browser?.close()
 
       await super.teardown()
+      console.log('[debug] teardown step 9')
     }
   }
 }
